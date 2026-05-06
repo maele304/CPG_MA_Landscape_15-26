@@ -1,0 +1,1878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CPG M&A Landscape · 2015–2026</title>
+<style>
+  /* ---- McKinsey-style typography & palette ---- */
+  :root {
+    --navy: #1F4E79;
+    --navy-dark: #0F2D49;
+    --blue: #2E75B6;
+    --text: #1A1A1A;
+    --text-muted: #595959;
+    --grey-line: #D9D9D9;
+    --grey-bg: #FAFAFA;
+    --white: #FFFFFF;
+
+    /* Archetype palette (matches PowerPoint mekko) */
+    --obj-scale: #1F4E79;
+    --obj-cap:   #604A7B;
+    --obj-trend: #2F7E7B;
+    --obj-adj:   #C2622A;
+    --obj-resh:  #548235;
+
+    /* Performance palette */
+    --perf-green: #4F9A4F;
+    --perf-red:   #C0443B;
+    --perf-amber: #DD8A3D;
+    --perf-pink:  #E48A9E;
+
+    /* Era textures */
+    --era1: #FFF4ED;
+    --era2: #F0F4F8;
+    --era3: #F4F8F2;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: 'Calibri', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--white);
+    color: var(--text);
+    margin: 0;
+    padding: 24px 36px 48px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* ---- HEADER ---- */
+  .topline {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .brand {
+    font-family: 'Calibri', system-ui, sans-serif;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 0.20em;
+    color: var(--navy);
+    padding: 5px 12px;
+    border: 1.5px solid var(--navy);
+    border-radius: 3px;
+    line-height: 1;
+  }
+  .brand-amp {
+    color: var(--blue);
+    margin: 0 1px;
+    font-weight: 600;
+  }
+
+  .badge {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    padding: 4px 10px;
+    background: var(--grey-bg);
+    border-radius: 3px;
+  }
+
+  h1 {
+    color: var(--navy);
+    font-size: 30px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    line-height: 1.15;
+  }
+
+  .subtitle {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-style: italic;
+    margin: 0 0 24px;
+    line-height: 1.4;
+  }
+
+  /* ---- VIEW SWITCHER + TABS ---- */
+  .view-switcher {
+    display: flex;
+    align-items: stretch;
+    gap: 14px;
+    background: var(--grey-bg);
+    border: 1px solid var(--grey-line);
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 18px;
+  }
+
+  .view-switcher-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    align-self: center;
+    padding: 0 8px 0 4px;
+    border-right: 1px solid var(--grey-line);
+    margin-right: 2px;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 6px;
+    flex: 1;
+    flex-wrap: wrap;
+  }
+
+  .tab {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--white);
+    border: 1px solid var(--grey-line);
+    border-radius: 6px;
+    font-family: inherit;
+    color: var(--text-muted);
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    text-align: left;
+    min-width: 200px;
+  }
+
+  .tab:hover {
+    border-color: var(--blue);
+    color: var(--navy);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(31, 78, 121, 0.08);
+  }
+
+  .tab.active {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: var(--white);
+    box-shadow: 0 2px 8px rgba(31, 78, 121, 0.25);
+  }
+
+  .tab-icon {
+    font-size: 18px;
+    line-height: 1;
+    color: var(--blue);
+    transition: color 0.18s;
+  }
+  .tab.active .tab-icon { color: var(--white); }
+
+  .tab-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    line-height: 1.1;
+  }
+  .tab-title {
+    font-size: 13.5px;
+    font-weight: 700;
+  }
+  .tab-sub {
+    font-size: 10.5px;
+    font-style: italic;
+    opacity: 0.75;
+    font-weight: 400;
+  }
+
+  /* ---- CHART AREA ---- */
+  .chart-wrapper {
+    position: relative;
+    background: var(--white);
+  }
+
+  svg.chart {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  /* ---- BUBBLES ---- */
+  .bubble {
+    cursor: pointer;
+    transition: cx 0.55s cubic-bezier(0.65, 0, 0.35, 1),
+                cy 0.55s cubic-bezier(0.65, 0, 0.35, 1),
+                fill 0.45s ease,
+                stroke 0.45s ease,
+                transform 0.12s ease-out,
+                filter 0.12s ease-out;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  .bubble:hover {
+    transform: scale(1.12);
+    filter: brightness(1.1) drop-shadow(0 1px 4px rgba(0,0,0,0.15));
+  }
+
+  .bubble-label {
+    fill: var(--white);
+    font-weight: 700;
+    pointer-events: none;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    transition: x 0.55s cubic-bezier(0.65, 0, 0.35, 1),
+                y 0.55s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .bubble-name-below {
+    fill: var(--text);
+    font-weight: 700;
+    font-size: 9px;
+    pointer-events: none;
+    text-anchor: middle;
+  }
+
+  .num-below {
+    fill: var(--text-muted);
+    font-weight: 700;
+    font-size: 9px;
+    pointer-events: none;
+    text-anchor: middle;
+    transition: x 0.55s cubic-bezier(0.65, 0, 0.35, 1),
+                y 0.55s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  /* ---- CHROME (era backgrounds, lane labels, year labels) cross-fade ---- */
+  .chrome {
+    transition: opacity 0.30s ease-out;
+  }
+  .chrome-entering {
+    opacity: 0;
+  }
+  .chrome-fading-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .lane-line { stroke: var(--grey-line); stroke-width: 1; }
+  .era-divider { stroke: #BFBFBF; stroke-width: 1; stroke-dasharray: 3 3; }
+
+  .lane-label {
+    fill: var(--text);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+  .lane-label.muted { fill: var(--text-muted); }
+  .lane-sublabel {
+    fill: var(--text-muted);
+    font-size: 10px;
+    font-style: italic;
+  }
+
+  .year-label {
+    fill: var(--text-muted);
+    font-size: 11px;
+    text-anchor: middle;
+  }
+
+  .era-caption {
+    fill: var(--text);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-anchor: middle;
+  }
+  .era-note {
+    fill: var(--text-muted);
+    font-size: 10px;
+    font-style: italic;
+    text-anchor: middle;
+  }
+
+  /* ---- TOOLTIP ---- */
+  #tooltip {
+    position: absolute;
+    background: white;
+    border: 1px solid var(--grey-line);
+    border-radius: 6px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    padding: 12px 14px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.1s;
+    z-index: 100;
+    font-size: 12.5px;
+    max-width: 280px;
+    line-height: 1.45;
+  }
+  #tooltip.visible { opacity: 1; }
+
+  #tooltip .tt-deal-no {
+    display: inline-block;
+    background: var(--navy);
+    color: white;
+    font-weight: 700;
+    font-size: 11px;
+    padding: 1px 7px;
+    border-radius: 9px;
+    margin-right: 6px;
+  }
+
+  #tooltip .tt-name {
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  #tooltip .tt-row {
+    display: grid;
+    grid-template-columns: 92px 1fr;
+    gap: 4px 10px;
+    margin-top: 2px;
+  }
+  #tooltip .tt-key {
+    color: var(--text-muted);
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  #tooltip .tt-val {
+    color: var(--text);
+    font-size: 12.5px;
+  }
+  #tooltip .tt-val.size {
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  #tooltip .tt-perf {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    color: white;
+  }
+  #tooltip .tt-perf-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  #tooltip .tt-spec-tag {
+    display: inline-block;
+    border: 1px dashed var(--text-muted);
+    color: var(--text-muted);
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-left: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  /* ---- LEGEND ---- */
+  .legend {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--grey-line);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px 28px;
+    align-items: flex-start;
+    font-size: 12px;
+  }
+
+  .legend-title {
+    font-style: italic;
+    font-weight: 700;
+    color: var(--text-muted);
+    font-size: 11.5px;
+    margin-right: 4px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .legend-swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1px solid currentColor;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .legend-swatch.square {
+    border-radius: 3px;
+  }
+  .legend-text strong {
+    color: var(--text);
+    font-weight: 700;
+  }
+  .legend-text .desc {
+    color: var(--text-muted);
+    font-size: 10.5px;
+    font-style: italic;
+    display: block;
+    margin-top: 1px;
+  }
+
+  /* ---- FOOTER NOTE ---- */
+  .footer-note {
+    margin-top: 28px;
+    color: var(--text-muted);
+    font-size: 10.5px;
+    font-style: italic;
+    line-height: 1.4;
+    text-align: right;
+  }
+
+  /* ---- HEADER STAT BAR ---- */
+  .stat-bar {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding: 14px 0 18px;
+    margin-top: -8px;
+    color: var(--text-muted);
+    font-size: 12px;
+  }
+  .stat-bar strong {
+    color: var(--navy);
+    font-weight: 700;
+    font-size: 14px;
+    margin-right: 4px;
+  }
+
+  /* ---- SIGNATURE (bottom of page) ---- */
+  .signature {
+    margin-top: 32px;
+    padding-top: 18px;
+    border-top: 1px solid var(--grey-line);
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    justify-content: flex-end;
+    color: var(--text-muted);
+  }
+  .signature-mark {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--navy);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+  .signature-meta {
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ---- WATERMARK (subtle background mark in chart area) ---- */
+  .watermark {
+    fill: #6E7785;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-style: italic;
+    opacity: 0.12;
+    pointer-events: none;
+    user-select: none;
+    /* font-size set inline so it can scale per chart */
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="topline">
+    <div class="badge">Interactive</div>
+  </div>
+  <h1>CPG M&amp;A Landscape, 2015–2026 YTD.</h1>
+  <p class="subtitle">56 confirmed deals + 8 announced/speculated. Hover any bubble for deal details; switch the view-toggle below to recolor and re-bin the same set of deals.</p>
+
+  <div class="stat-bar" id="statBar"></div>
+
+  <div class="view-switcher">
+    <span class="view-switcher-label">View:</span>
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-view="archetype" role="tab" aria-selected="true">
+        <span class="tab-icon" aria-hidden="true">◐</span>
+        <span class="tab-text">
+          <span class="tab-title">Strategic objective</span>
+          <span class="tab-sub">color = archetype</span>
+        </span>
+      </button>
+      <button class="tab" data-view="performance" role="tab" aria-selected="false">
+        <span class="tab-icon" aria-hidden="true">●</span>
+        <span class="tab-text">
+          <span class="tab-title">Outcome</span>
+          <span class="tab-sub">color = performance</span>
+        </span>
+      </button>
+      <button class="tab" data-view="subsegment" role="tab" aria-selected="false">
+        <span class="tab-icon" aria-hidden="true">▤</span>
+        <span class="tab-text">
+          <span class="tab-title">Sub-segment</span>
+          <span class="tab-sub">y-axis = category</span>
+        </span>
+      </button>
+    </nav>
+  </div>
+
+  <div class="chart-wrapper">
+    <svg id="chart" class="chart" viewBox="0 0 1400 620" preserveAspectRatio="xMidYMid meet"></svg>
+    <div id="tooltip" role="tooltip" aria-hidden="true"></div>
+  </div>
+
+  <div class="legend" id="legend"></div>
+
+  <div class="footer-note" id="footerNote">
+    56 confirmed + 8 announced/speculated deals 2015–2026 (sized at announcement). Chart shows ≥$1bn only; smaller deals retained in source data.
+  </div>
+
+  <div class="signature">
+    <div class="signature-mark">Mae Le</div>
+    <div class="signature-meta">Strategy Research · 2026</div>
+  </div>
+
+</div>
+
+<script>
+// =====================================================================
+// DATA
+// =====================================================================
+const DEALS = [
+  {
+    "acquirer": "Kraft+Heinz",
+    "target": "",
+    "year": 2015,
+    "size": 55,
+    "obj": "Scale Up",
+    "label": "Kraft+Heinz",
+    "speculated": false,
+    "perf": "red",
+    "subseg": "Food",
+    "dealNo": 1
+  },
+  {
+    "acquirer": "AB InBev",
+    "target": "SAB Miller",
+    "year": 2016,
+    "size": 103,
+    "obj": "Scale Up",
+    "label": "AB InBev/SAB",
+    "speculated": false,
+    "perf": "red",
+    "subseg": "Beverages — alcoholic",
+    "dealNo": 2
+  },
+  {
+    "acquirer": "Coty",
+    "target": "P&G Specialty Beauty",
+    "year": 2016,
+    "size": 12.5,
+    "obj": "Acquire Capability",
+    "label": "Coty/P&G",
+    "speculated": false,
+    "perf": "red",
+    "subseg": "Beauty & Personal Care",
+    "dealNo": 3
+  },
+  {
+    "acquirer": "Danone",
+    "target": "WhiteWave",
+    "year": 2016,
+    "size": 12.5,
+    "obj": "Bet on a Trend",
+    "label": "Danone/WhiteWave",
+    "speculated": false,
+    "perf": "red",
+    "subseg": "Beverages — non-alcoholic",
+    "dealNo": 4
+  },
+  {
+    "acquirer": "Unilever",
+    "target": "Dollar Shave Club",
+    "year": 2016,
+    "size": 1,
+    "obj": "Bet on a Trend",
+    "label": "",
+    "speculated": false,
+    "perf": "red",
+    "subseg": "Beauty & Personal Care",
+    "dealNo": 5
+  },
+  {
+    "acquirer": "McCormick",
+    "target": "RB Foods",
+    "year": 2017,
+    "size": 4.2,
+    "obj": "Scale Up",
+    "label": "",
+    "speculated": false,
+    "perf": "green",
+    "subseg": "Food",
+    "dealNo": 6
+  },
+  {
+    "acquirer": "L'Oréal",
+    "target": "CeraVe",
+    "year": 2017,
+    "size": 1.3,
+    "obj": "Acquire Capability",
+    "label": "",
+    "speculated": false,
+    "perf": "green",
+    "subseg": "Beauty & Personal Care",
+    "dealNo": 7
+  },
+  {
+    "acquirer": "Reckitt",
+    "target": "Mead Johnson",
+    "year": 2017,
+    "size": 18,
+    "obj": "Enter Adjacency",
+    "label": "Reckitt/MJN",
+    "speculated": false,
+    "perf": "red",
+    "subseg": "Consumer Health",
+    "dealNo": 8
+  },
+  {
+    "acquirer": "Mars",
+    "target": "VCA",
+    "year": 2017,
+    "size": 9.1,
+    "obj": "Enter Adjacency",
+    "label": "",
+    "speculated": false,
+    "perf": "green",
+    "subseg": "Pet & Household",
+    "dealNo": 9
+  },
+  {
+    "acquirer": "Conagra",
+    "target": "Pinnacle Foods",
+    "year": 2018,
+    "size": 10.9,
+    "obj": "Scale Up",
+    "label": "Conagra/Pinnacle",
+    "speculated": false,
+    "perf": "red",
+    "subseg": "Food",
+    "dealNo": 10
+  },
+  {
+    "acquirer": "KDP",
+    "target": "(Keurig + Dr Pepper)",
+    "year": 2018,
+    "size": 18.7,
+    "obj": "Scale Up",
+    "label": "KDP creation",
+    "speculated": false,
+    "perf": "amber",
+    "subseg": "Beverages — non-alcoholic",
+    "dealNo": 11
+  },
+  {
+    "acquirer": "Ferrero",
+    "target": "Nestlé US Confectionery",
+    "year": 2018,
+    "size": 2.8,
+    "obj": "Scale Up",
+    "label": "",
+    "speculated": false,
+    "perf": "green",
+    "subseg": "Food",
+    "dealNo": 12
+  },
+  {
+    "acquirer": "PepsiCo",
+    "target": "SodaStream",
+    "year": 2018,
+    "size": 3.2,
+    "obj": "Enter Adjacency",
+    "label": "",
+    "speculated": false,
+    "perf": "green",
+    "subseg": "Beverages — non-alcoholic",
+    "dealNo": 13
+  },
+  {
+    "acquirer": "Coca-Cola",
+    "target": "Costa Coffee",
+    "year": 2018,
+    "size": 5.1,
+    "obj": "Enter Adjacency",
+    "label": "",
+    "speculated": false,
+    "perf": "red",
+    "subseg": "Beverages — non-alcoholic",
+    "dealNo": 14
+  },
+  {
+    "acquirer": "GenMills",
+    "target": "Blue Buffalo",
+    "year": 2018,
+    "size": 8,
+    "obj": "Enter Adjacency",
+    "label": "",
+    "speculated": false,
+    "perf": "green",
+    "subseg": "Pet & Household",
+    "dealNo": 15
+  },
+  {
+    "acquirer": "Ferrero",
+    "target": "Kellogg cookies",
+    "year": 2019,
+    "size": 1.3,
+    "obj": "Scale Up",
+    "label": "",
+    "speculated": false,
+    "perf": "green",
+    "subseg": "Food",
+    "dealNo": 16
+  },
+  {
+    "acquirer": "Campbell→KKR",
+    "target": "(Arnott's)",
+    "year": 2019,
+    "size": 2.2,
+    "obj": "Reshape Portfolio",
+    "label": "",
+    "speculated": false,
+    "perf": "green",
+    "subseg": "Food",
+    "dealNo": 17
+  },
+  {
+    "acquirer": "Nestlé→EQT/ADIA",
+    "target": "(Skin Health)",
+    "year": 2019,
+    "size": 10.2,
+    "obj": "Reshape Portfolio",
+    "label": "",
+    "speculated": false,
+    "perf": "green",
+    "subseg": "Beauty & Personal Care",
+    "dealNo": 18
+  },
+  {
+    "acquirer": "Nestlé→Froneri",
+    "target": "(US ice cream)",
+    "year": 2019,
+    "size": 4,
+    "obj": "Reshape Portfolio",
+    "label": "",
+    "speculated": false,
+    "perf": "green",
+    "subseg": "Food",
+    "dealNo": 19
+  },
+  {
+    "acquirer": "PepsiCo",
+    "target": "Rockstar Energy",
+    "year": 2020,
+    "size": 3.85,
+    "obj": "Bet on a Trend",
+    "label": "",
+    "speculated": false,
+    "perf": "green",
+    "subseg": "Beverages — non-alcoholic",
+    "dealNo": 20
+  },
+  {
+    "acquirer": "Kraft Heinz→Lactalis",
+    "target": "(cheese)",
+    "year": 2020,
+    "size": 3.2,
+    "obj": "Reshape Portfolio",
+    "label": "",
+    "speculated": false,
+    "perf": "green",
+    "subseg": "Food",
+    "dealNo": 21
+  },
+  {
+    "acquirer": "Coca-Cola",
+    "target": "BODYARMOR",
+    "year": 2021,
+    "size": 5.6,
+    "obj": "Bet on a Trend",
+    "label": "",
+    "speculated": false,
+    "perf": "red",
+    "subseg": "Beverages — non-alcoholic",
+    "dealNo": 22
+  },
+  {
+    "acquirer": "Nestlé",
+    "target": "Bountiful",
+    "year": 2021,
+    "size": 5.75,
+    "obj": "Bet on a Trend",
+    "label": "",
+    "speculated": false,
+    "perf": "red",
+    "subseg": "Consumer Health",
+    "dealNo": 23
+  },
+  {
+    "acquirer": "PepsiCo→PAI",
+    "target": "(juice JV)",
+    "year": 2021,
+    "size": 3.3,
+    "obj": "Reshape Portfolio",
+    "label": "",
+    "speculated": false,
+    "perf": "green",
+    "subseg": "Beverages — non-alcoholic",
+    "dealNo": 24
+  },
+  {
+    "acquirer": "Unilever→ekaterra",
+    "target": "(to CVC)",
+    "year": 2021,
+    "size": 4.5,
+    "obj": "Reshape Portfolio",
+    "label": "",
+    "speculated": false,
+    "perf": "green",
+    "subseg": "Beverages — non-alcoholic",
+    "dealNo": 25
+  },
+  {
+    "acquirer": "Mondelez",
+    "target": "Clif Bar",
+    "year": 2022,
+    "size": 2.9,
+    "obj": "Acquire Capability",
+    "label": "",
+    "speculated": false,
+    "perf": "pink",
+    "subseg": "Food",
+    "dealNo": 26
+  },
+  {
+    "acquirer": "GSK→Haleon",
+    "target": "(demerger)",
+    "year": 2022,
+    "size": 30,
+    "obj": "Reshape Portfolio",
+    "label": "GSK→Haleon",
+    "speculated": false,
+    "perf": "green",
+    "subseg": "Consumer Health",
+    "dealNo": 27
+  },
+  {
+    "acquirer": "L'Oréal",
+    "target": "Aēsop",
+    "year": 2023,
+    "size": 2.5,
+    "obj": "Acquire Capability",
+    "label": "",
+    "speculated": false,
+    "perf": "pink",
+    "subseg": "Beauty & Personal Care",
+    "dealNo": 28
+  },
+  {
+    "acquirer": "Campbell",
+    "target": "Sovos (Rao's)",
+    "year": 2023,
+    "size": 2.7,
+    "obj": "Acquire Capability",
+    "label": "",
+    "speculated": false,
+    "perf": "pink",
+    "subseg": "Food",
+    "dealNo": 29
+  },
+  {
+    "acquirer": "Post",
+    "target": "Smucker pet food",
+    "year": 2023,
+    "size": 1.2,
+    "obj": "Enter Adjacency",
+    "label": "",
+    "speculated": false,
+    "perf": "pink",
+    "subseg": "Pet & Household",
+    "dealNo": 30
+  },
+  {
+    "acquirer": "J.M. Smucker",
+    "target": "Hostess",
+    "year": 2023,
+    "size": 5.6,
+    "obj": "Enter Adjacency",
+    "label": "",
+    "speculated": false,
+    "perf": "red",
+    "subseg": "Food",
+    "dealNo": 31
+  },
+  {
+    "acquirer": "J&J→Kenvue",
+    "target": "(IPO/spin)",
+    "year": 2023,
+    "size": 40,
+    "obj": "Reshape Portfolio",
+    "label": "J&J→Kenvue",
+    "speculated": false,
+    "perf": "amber",
+    "subseg": "Consumer Health",
+    "dealNo": 32
+  },
+  {
+    "acquirer": "Mars",
+    "target": "Kellanova",
+    "year": 2024,
+    "size": 36,
+    "obj": "Scale Up",
+    "label": "Mars/Kellanova",
+    "speculated": false,
+    "perf": "pink",
+    "subseg": "Food",
+    "dealNo": 33
+  },
+  {
+    "acquirer": "Carlsberg",
+    "target": "Britvic",
+    "year": 2024,
+    "size": 5.2,
+    "obj": "Scale Up",
+    "label": "",
+    "speculated": false,
+    "perf": "pink",
+    "subseg": "Beverages — non-alcoholic",
+    "dealNo": 34
+  },
+  {
+    "acquirer": "PepsiCo",
+    "target": "Siete Foods",
+    "year": 2024,
+    "size": 1.2,
+    "obj": "Bet on a Trend",
+    "label": "",
+    "speculated": false,
+    "perf": "pink",
+    "subseg": "Food",
+    "dealNo": 35
+  },
+  {
+    "acquirer": "GenMills→Lactalis/Sodiaal",
+    "target": "(yogurt)",
+    "year": 2024,
+    "size": 2.1,
+    "obj": "Reshape Portfolio",
+    "label": "",
+    "speculated": false,
+    "perf": "green",
+    "subseg": "Food",
+    "dealNo": 36
+  },
+  {
+    "acquirer": "KDP",
+    "target": "JDE Peet's",
+    "year": 2025,
+    "size": 24,
+    "obj": "Scale Up",
+    "label": "KDP/JDE",
+    "speculated": false,
+    "perf": "pink",
+    "subseg": "Beverages — non-alcoholic",
+    "dealNo": 37
+  },
+  {
+    "acquirer": "Ferrero",
+    "target": "WK Kellogg",
+    "year": 2025,
+    "size": 3.1,
+    "obj": "Scale Up",
+    "label": "",
+    "speculated": false,
+    "perf": "pink",
+    "subseg": "Food",
+    "dealNo": 38
+  },
+  {
+    "acquirer": "Coca-Cola HBC",
+    "target": "CCBA",
+    "year": 2025,
+    "size": 3.8,
+    "obj": "Scale Up",
+    "label": "",
+    "speculated": false,
+    "perf": "pink",
+    "subseg": "Beverages — non-alcoholic",
+    "dealNo": 39
+  },
+  {
+    "acquirer": "Heineken",
+    "target": "FIFCO",
+    "year": 2025,
+    "size": 3.2,
+    "obj": "Scale Up",
+    "label": "",
+    "speculated": false,
+    "perf": "pink",
+    "subseg": "Beverages — alcoholic",
+    "dealNo": 40
+  },
+  {
+    "acquirer": "Lactalis",
+    "target": "Fonterra Ingredients",
+    "year": 2025,
+    "size": 2.5,
+    "obj": "Scale Up",
+    "label": "",
+    "speculated": false,
+    "perf": "pink",
+    "subseg": "Food",
+    "dealNo": 41
+  },
+  {
+    "acquirer": "PepsiCo",
+    "target": "Poppi",
+    "year": 2025,
+    "size": 1.95,
+    "obj": "Bet on a Trend",
+    "label": "",
+    "speculated": false,
+    "perf": "pink",
+    "subseg": "Beverages — non-alcoholic",
+    "dealNo": 42
+  },
+  {
+    "acquirer": "e.l.f.",
+    "target": "rhode",
+    "year": 2025,
+    "size": 1,
+    "obj": "Bet on a Trend",
+    "label": "",
+    "speculated": false,
+    "perf": "pink",
+    "subseg": "Beauty & Personal Care",
+    "dealNo": 43
+  },
+  {
+    "acquirer": "KMB",
+    "target": "Kenvue",
+    "year": 2025,
+    "size": 49.7,
+    "obj": "Enter Adjacency",
+    "label": "KMB/Kenvue",
+    "speculated": false,
+    "perf": "pink",
+    "subseg": "Consumer Health",
+    "dealNo": 44
+  },
+  {
+    "acquirer": "Reckitt→Advent",
+    "target": "(Essential Home)",
+    "year": 2025,
+    "size": 4.8,
+    "obj": "Reshape Portfolio",
+    "label": "",
+    "speculated": false,
+    "perf": "pink",
+    "subseg": "Pet & Household",
+    "dealNo": 45
+  },
+  {
+    "acquirer": "Unilever→Magnum",
+    "target": "(demerger)",
+    "year": 2025,
+    "size": 15,
+    "obj": "Reshape Portfolio",
+    "label": "Unilever→Magnum",
+    "speculated": false,
+    "perf": "pink",
+    "subseg": "Food",
+    "dealNo": 46
+  },
+  {
+    "acquirer": "Nestlé→PAI/ADIA",
+    "target": "(Froneri restructure)",
+    "year": 2025,
+    "size": 4.2,
+    "obj": "Reshape Portfolio",
+    "label": "",
+    "speculated": false,
+    "perf": "pink",
+    "subseg": "Food",
+    "dealNo": 47
+  },
+  {
+    "acquirer": "TreeHouse",
+    "target": "(to Investindustrial)",
+    "year": 2025,
+    "size": 2.9,
+    "obj": "Reshape Portfolio",
+    "label": "",
+    "speculated": false,
+    "perf": "pink",
+    "subseg": "Food",
+    "dealNo": 48
+  },
+  {
+    "acquirer": "Estée Lauder",
+    "target": "(restructuring divestitures)",
+    "year": 2025,
+    "size": 5,
+    "obj": "Reshape Portfolio",
+    "label": "",
+    "speculated": true,
+    "perf": "pink",
+    "subseg": "Beauty & Personal Care",
+    "dealNo": 49
+  },
+  {
+    "acquirer": "Kraft Heinz split",
+    "target": "(announced, paused Feb '26)",
+    "year": 2025,
+    "size": 30,
+    "obj": "Reshape Portfolio",
+    "label": "Kraft Heinz split",
+    "speculated": true,
+    "perf": "amber",
+    "subseg": "Food",
+    "dealNo": 50
+  },
+  {
+    "acquirer": "L'Oréal",
+    "target": "Kering Beauté",
+    "year": 2026,
+    "size": 4.7,
+    "obj": "Acquire Capability",
+    "label": "",
+    "speculated": false,
+    "perf": "pink",
+    "subseg": "Beauty & Personal Care",
+    "dealNo": 51
+  },
+  {
+    "acquirer": "Clorox",
+    "target": "GOJO/Purell",
+    "year": 2026,
+    "size": 2.25,
+    "obj": "Enter Adjacency",
+    "label": "",
+    "speculated": false,
+    "perf": "pink",
+    "subseg": "Pet & Household",
+    "dealNo": 52
+  },
+  {
+    "acquirer": "McCormick",
+    "target": "Unilever Foods (RMT)",
+    "year": 2026,
+    "size": 45,
+    "obj": "Enter Adjacency",
+    "label": "McCormick/UF",
+    "speculated": false,
+    "perf": "pink",
+    "subseg": "Food",
+    "dealNo": 53
+  },
+  {
+    "acquirer": "Bayer CH spin",
+    "target": "(rumored)",
+    "year": 2026,
+    "size": 20,
+    "obj": "Reshape Portfolio",
+    "label": "Bayer CH",
+    "speculated": true,
+    "perf": "pink",
+    "subseg": "Consumer Health",
+    "dealNo": 54
+  },
+  {
+    "acquirer": "Henkel Beauty",
+    "target": "(strategic review)",
+    "year": 2026,
+    "size": 5,
+    "obj": "Reshape Portfolio",
+    "label": "",
+    "speculated": true,
+    "perf": "pink",
+    "subseg": "Beauty & Personal Care",
+    "dealNo": 55
+  },
+  {
+    "acquirer": "Nestlé",
+    "target": "Sweet Earth",
+    "year": 2017,
+    "size": 0.4,
+    "obj": "Bet on a Trend",
+    "label": "",
+    "speculated": true,
+    "perf": "pink",
+    "subseg": "Food",
+    "dealNo": 56
+  },
+  {
+    "acquirer": "McCormick",
+    "target": "Cholula",
+    "year": 2020,
+    "size": 0.8,
+    "obj": "Acquire Capability",
+    "label": "",
+    "speculated": false,
+    "perf": "green",
+    "subseg": "Food",
+    "dealNo": 57
+  },
+  {
+    "acquirer": "Mondelez",
+    "target": "Hu Kitchen",
+    "year": 2021,
+    "size": 0.34,
+    "obj": "Acquire Capability",
+    "label": "",
+    "speculated": true,
+    "perf": "pink",
+    "subseg": "Food",
+    "dealNo": 58
+  },
+  {
+    "acquirer": "Hero/Mighty Patch",
+    "target": "(C&D)",
+    "year": 2022,
+    "size": 0.63,
+    "obj": "Acquire Capability",
+    "label": "",
+    "speculated": false,
+    "perf": "green",
+    "subseg": "Beauty & Personal Care",
+    "dealNo": 59
+  },
+  {
+    "acquirer": "GenMills sale",
+    "target": "(Helper, Suddenly Salad)",
+    "year": 2022,
+    "size": 0.61,
+    "obj": "Reshape Portfolio",
+    "label": "",
+    "speculated": false,
+    "perf": "green",
+    "subseg": "Food",
+    "dealNo": 60
+  },
+  {
+    "acquirer": "L'Oréal",
+    "target": "Skinbetter",
+    "year": 2022,
+    "size": 0.25,
+    "obj": "Acquire Capability",
+    "label": "",
+    "speculated": true,
+    "perf": "pink",
+    "subseg": "Beauty & Personal Care",
+    "dealNo": 61
+  },
+  {
+    "acquirer": "Unilever",
+    "target": "Nutrafol",
+    "year": 2022,
+    "size": 0.55,
+    "obj": "Bet on a Trend",
+    "label": "",
+    "speculated": true,
+    "perf": "pink",
+    "subseg": "Beauty & Personal Care",
+    "dealNo": 62
+  },
+  {
+    "acquirer": "KDP",
+    "target": "GHOST (60%)",
+    "year": 2024,
+    "size": 0.99,
+    "obj": "Bet on a Trend",
+    "label": "",
+    "speculated": false,
+    "perf": "pink",
+    "subseg": "Beverages — non-alcoholic",
+    "dealNo": 63
+  },
+  {
+    "acquirer": "Flowers",
+    "target": "Simple Mills",
+    "year": 2025,
+    "size": 0.795,
+    "obj": "Acquire Capability",
+    "label": "",
+    "speculated": false,
+    "perf": "pink",
+    "subseg": "Food",
+    "dealNo": 64
+  }
+];
+
+// =====================================================================
+// CONFIG
+// =====================================================================
+const OBJECTIVES = ["Scale Up", "Acquire Capability", "Bet on a Trend", "Enter Adjacency", "Reshape Portfolio"];
+const SUBSEGMENTS = [
+  "Food",
+  "Beverages — non-alcoholic",
+  "Beverages — alcoholic",
+  "Beauty & Personal Care",
+  "Consumer Health",
+  "Pet & Household",
+];
+
+// Display labels for sub-segments (drop em-dashes for cleaner display)
+const SUBSEG_DISPLAY = {
+  "Food":                       "Food",
+  "Beverages — non-alcoholic":  "Beverages, non-alc",
+  "Beverages — alcoholic":      "Beverages, alcoholic",
+  "Beauty & Personal Care":     "Beauty & Personal Care",
+  "Consumer Health":            "Consumer Health",
+  "Pet & Household":            "Pet & Household",
+};
+
+const OBJ_COLORS = {
+  "Scale Up":           "#1F4E79",
+  "Acquire Capability": "#604A7B",
+  "Bet on a Trend":     "#2F7E7B",
+  "Enter Adjacency":    "#C2622A",
+  "Reshape Portfolio":  "#548235",
+};
+
+const PERF_COLORS = {
+  "green": "#4F9A4F",
+  "red":   "#C0443B",
+  "amber": "#DD8A3D",
+  "pink":  "#E48A9E",
+};
+
+const PERF_LABELS = {
+  "green": "Working",
+  "red":   "Failed / impaired",
+  "amber": "Pivoted",
+  "pink":  "Too early to tell",
+};
+
+const PERF_DESCRIPTIONS = {
+  "green": "No public impairment; thesis paying off; value created",
+  "red":   "Fact-based: write-downs, divested at loss, abandoned thesis",
+  "amber": "Deal happened, then strategy changed (de-merger, absorption, split)",
+  "pink":  "Typically 2023+ deals; outcome not yet observable",
+};
+
+const ERAS = [
+  { startYear: 2015, endYear: 2017, tint: "#FFF4ED",
+    caption: "Mega-mergers wave",
+    note: "Large transformative deals across Scale Up, Capability and Adjacency" },
+  { startYear: 2018, endYear: 2021, tint: "#F0F4F8",
+    caption: "COVID-era reset",
+    note: "Continued bolt-ons + first divestiture wave; supply-chain disruption + valuation reset" },
+  { startYear: 2022, endYear: 2026, tint: "#F4F8F2",
+    caption: "Selective return",
+    note: "Renewed mega-deal volume + structural reshape (demergers, PE carve-outs)" },
+];
+
+// In-bubble names for ≥$32bn deals (consistent with PPT)
+const HUGE_LABELS = {
+  "Kraft+Heinz|":                                    "Kraft+Heinz",
+  "AB InBev|SAB Miller":                             "AB InBev/SAB",
+  "KMB|Kenvue":                                      "KMB/Kenvue",
+  "Mars|Kellanova":                                  "Kellanova",
+  "J&J→Kenvue|(IPO/spin)":                           "Kenvue spin",
+  "McCormick|Unilever Foods (RMT)":                  "McCormick/UF",
+};
+
+// Layout — SVG coordinates
+const VIEWBOX_W = 1400;
+const VIEWBOX_H = 620;
+const PLOT_X = 200;
+const PLOT_Y = 130;
+const PLOT_W = 1180;
+const ERA_HDR_H = 60;
+const LANE_TOP_Y = PLOT_Y + ERA_HDR_H;
+const PLOT_H = 380;
+const PLOT_BOT = LANE_TOP_Y + PLOT_H;
+const X_MIN = 2015;
+const X_MAX = 2026;
+const N_YEARS = X_MAX - X_MIN + 1;
+
+// Bubble sizing
+const BUBBLE_MIN = 8;
+const BUBBLE_MAX = 56;
+const SIZE_MAX = 110;
+
+// =====================================================================
+// HELPERS
+// =====================================================================
+function xForYear(y) {
+  return PLOT_X + ((y - X_MIN) + 0.5) * (PLOT_W / N_YEARS);
+}
+function rForSize(s) {
+  if (s <= 0) return BUBBLE_MIN / 2;
+  const norm = Math.sqrt(s / SIZE_MAX);
+  return (BUBBLE_MIN + norm * (BUBBLE_MAX - BUBBLE_MIN)) / 2;
+}
+function fmtSize(d) {
+  if (d.size >= 10) return "$" + Math.round(d.size) + "bn";
+  if (d.size >= 1)  return "$" + d.size.toFixed(1) + "bn";
+  return "$" + Math.round(d.size * 1000) + "m";
+}
+function dealKey(d) { return d.acquirer + "|" + d.target; }
+function getHugeLabel(d) { return HUGE_LABELS[dealKey(d)] || null; }
+
+// =====================================================================
+// JITTER (per view, since lane assignment differs)
+// =====================================================================
+function computeJitter(deals, slotKeyFn, laneH) {
+  const groups = {};
+  deals.forEach(d => {
+    const k = slotKeyFn(d);
+    if (!groups[k]) groups[k] = [];
+    groups[k].push(d);
+  });
+  const map = new Map();
+  const yearW = PLOT_W / N_YEARS;
+  Object.values(groups).forEach(group => {
+    if (group.length === 1) {
+      map.set(group[0], { dx: 0, dy: 0 });
+    } else {
+      const spread = Math.min(yearW * 0.5, 14 * group.length);
+      group.forEach((d, i) => {
+        const dx = (i - (group.length - 1) / 2) * (spread / Math.max(1, group.length - 1));
+        const dy = group.length > 2 ? (i % 2 === 0 ? -8 : 8) : 0;
+        map.set(d, { dx, dy });
+      });
+    }
+  });
+  return map;
+}
+
+// =====================================================================
+// RENDER
+// =====================================================================
+const svg = document.getElementById("chart");
+const tooltip = document.getElementById("tooltip");
+const SVG_NS = "http://www.w3.org/2000/svg";
+
+function el(tag, attrs = {}, children = []) {
+  const e = document.createElementNS(SVG_NS, tag);
+  for (const k in attrs) {
+    if (attrs[k] !== undefined && attrs[k] !== null) {
+      e.setAttribute(k, attrs[k]);
+    }
+  }
+  (Array.isArray(children) ? children : [children]).forEach(c => {
+    if (typeof c === "string") e.appendChild(document.createTextNode(c));
+    else if (c) e.appendChild(c);
+  });
+  return e;
+}
+
+// Persistent SVG groups so bubbles animate between views
+let chromeGroup = null;   // chrome: era bg, lane lines, labels — re-rendered each view
+let bubblesGroup = null;  // bubbles + numbers — persistent, attributes update for transitions
+const bubbleNodes = new Map();  // dealNo -> { circle, label }
+
+function render(view) {
+  const chartDeals = DEALS.filter(d => d.size >= 1.0);
+
+  // Determine lanes & y-mapping for this view
+  let lanes, yForDeal, laneH, laneLabel, laneSublabel, bubbleColor, isMutedLaneSwatch;
+  let laneSwatchColor;
+
+  if (view === "archetype") {
+    lanes = OBJECTIVES;
+    laneH = PLOT_H / lanes.length;
+    yForDeal = d => LANE_TOP_Y + lanes.indexOf(d.obj) * laneH + laneH / 2;
+    laneLabel = obj => obj.toUpperCase();
+    laneSublabel = () => "";
+    bubbleColor = d => OBJ_COLORS[d.obj];
+    laneSwatchColor = obj => OBJ_COLORS[obj];
+    isMutedLaneSwatch = false;
+  } else if (view === "performance") {
+    lanes = OBJECTIVES;
+    laneH = PLOT_H / lanes.length;
+    yForDeal = d => LANE_TOP_Y + lanes.indexOf(d.obj) * laneH + laneH / 2;
+    laneLabel = obj => obj.toUpperCase();
+    laneSublabel = () => "";
+    bubbleColor = d => PERF_COLORS[d.perf] || "#BFBFBF";
+    laneSwatchColor = () => "#BFBFBF";
+    isMutedLaneSwatch = true;
+  } else if (view === "subsegment") {
+    lanes = SUBSEGMENTS;
+    laneH = PLOT_H / lanes.length;
+    yForDeal = d => LANE_TOP_Y + lanes.indexOf(d.subseg) * laneH + laneH / 2;
+    const totals = {};
+    SUBSEGMENTS.forEach(s => totals[s] = { count: 0, dollars: 0 });
+    chartDeals.forEach(d => {
+      if (totals[d.subseg]) {
+        totals[d.subseg].count++;
+        totals[d.subseg].dollars += d.size;
+      }
+    });
+    laneLabel = seg => (SUBSEG_DISPLAY[seg] || seg).toUpperCase();
+    laneSublabel = seg => {
+      const t = totals[seg];
+      const dStr = t.dollars >= 100 ? "$" + Math.round(t.dollars) + "bn" : "$" + Math.round(t.dollars) + "bn";
+      return t.count + " deals · " + dStr;
+    };
+    bubbleColor = d => OBJ_COLORS[d.obj];
+    laneSwatchColor = () => "#BFBFBF";
+    isMutedLaneSwatch = true;
+  }
+
+  // Compute jitter per view
+  let jitterMap;
+  if (view === "subsegment") {
+    jitterMap = computeJitter(chartDeals, d => d.year + "_" + d.subseg, laneH);
+  } else {
+    jitterMap = computeJitter(chartDeals, d => d.year + "_" + d.obj, laneH);
+  }
+
+  // ---- CHROME (re-rendered each view; can fade/cross-dissolve) ----
+  if (chromeGroup) {
+    chromeGroup.classList.add("chrome-fading-out");
+    const oldChrome = chromeGroup;
+    setTimeout(() => oldChrome.remove(), 220);
+  }
+  chromeGroup = el("g", { class: "chrome chrome-entering" });
+  svg.insertBefore(chromeGroup, svg.firstChild);
+
+  // Era backgrounds
+  ERAS.forEach(era => {
+    const x1 = xForYear(era.startYear) - PLOT_W / N_YEARS / 2;
+    const x2 = xForYear(era.endYear) + PLOT_W / N_YEARS / 2;
+    chromeGroup.appendChild(el("rect", {
+      x: x1, y: LANE_TOP_Y, width: x2 - x1, height: PLOT_H,
+      fill: era.tint,
+    }));
+    chromeGroup.appendChild(el("text", {
+      x: (x1 + x2) / 2, y: PLOT_Y + 22,
+      class: "era-caption",
+    }, era.caption));
+    const noteWords = era.note.split(" ");
+    let line1 = "", line2 = "";
+    let idx = 0;
+    while (idx < noteWords.length && (line1 + " " + noteWords[idx]).trim().length < 60) {
+      line1 = (line1 + " " + noteWords[idx]).trim();
+      idx++;
+    }
+    line2 = noteWords.slice(idx).join(" ");
+    chromeGroup.appendChild(el("text", { x: (x1 + x2) / 2, y: PLOT_Y + 38, class: "era-note" }, line1));
+    if (line2) chromeGroup.appendChild(el("text", { x: (x1 + x2) / 2, y: PLOT_Y + 51, class: "era-note" }, line2));
+    if (era.startYear !== 2015) {
+      chromeGroup.appendChild(el("line", {
+        x1: x1, y1: LANE_TOP_Y, x2: x1, y2: PLOT_BOT,
+        class: "era-divider",
+      }));
+    }
+  });
+
+  // Watermark — sits ON TOP of era tints but underneath bubbles (which are in a separate group)
+  const watermarkX = PLOT_X + PLOT_W / 2;
+  const watermarkY = LANE_TOP_Y + PLOT_H / 2;
+  chromeGroup.appendChild(el("text", {
+    x: watermarkX, y: watermarkY,
+    class: "watermark",
+    "text-anchor": "middle",
+    transform: `rotate(-15 ${watermarkX} ${watermarkY})`,
+    "font-size": 56,
+  }, "Mae Le · Strategy Research 2026"));
+
+  // Lane grid + labels
+  chromeGroup.appendChild(el("line", { x1: PLOT_X, y1: LANE_TOP_Y, x2: PLOT_X + PLOT_W, y2: LANE_TOP_Y, class: "lane-line" }));
+  lanes.forEach((lane, i) => {
+    const yTop = LANE_TOP_Y + i * laneH;
+    const yMid = yTop + laneH / 2;
+    const yBot = yTop + laneH;
+
+    chromeGroup.appendChild(el("line", { x1: PLOT_X, y1: yBot, x2: PLOT_X + PLOT_W, y2: yBot, class: "lane-line" }));
+
+    chromeGroup.appendChild(el("rect", {
+      x: 25, y: yMid - 8, width: 14, height: 14,
+      fill: laneSwatchColor(lane), rx: 2,
+    }));
+    const label = laneLabel(lane);
+    const sublabel = laneSublabel(lane);
+    const maxChars = 20;
+    let labelLines = [label];
+    if (label.length > maxChars) {
+      const words = label.split(" ");
+      let l1 = "", l2 = "";
+      for (const w of words) {
+        if ((l1 + " " + w).trim().length <= maxChars) l1 = (l1 + " " + w).trim();
+        else l2 = (l2 + " " + w).trim();
+      }
+      labelLines = [l1, l2];
+    }
+    let textY = yMid - (sublabel ? 8 : 0) - (labelLines.length - 1) * 6;
+    labelLines.forEach((line, idx) => {
+      chromeGroup.appendChild(el("text", {
+        x: 47, y: textY + idx * 13,
+        class: "lane-label" + (isMutedLaneSwatch ? " muted" : ""),
+      }, line));
+    });
+    if (sublabel) {
+      chromeGroup.appendChild(el("text", {
+        x: 47, y: textY + labelLines.length * 13 + 2,
+        class: "lane-sublabel",
+      }, sublabel));
+    }
+  });
+
+  // Year labels
+  for (let y = X_MIN; y <= X_MAX; y++) {
+    chromeGroup.appendChild(el("text", {
+      x: xForYear(y), y: PLOT_BOT + 18, class: "year-label",
+    }, "'" + String(y).slice(2)));
+  }
+
+  // Trigger fade-in on chrome
+  requestAnimationFrame(() => {
+    chromeGroup.classList.remove("chrome-entering");
+  });
+
+  // ---- BUBBLES (persistent — animate cx/cy/fill) ----
+  if (!bubblesGroup) {
+    bubblesGroup = el("g", { class: "bubbles" });
+    svg.appendChild(bubblesGroup);
+  } else {
+    // Move to top of svg so it stays above chrome
+    svg.appendChild(bubblesGroup);
+  }
+
+  // Sort largest first for z-order (small on top)
+  const sorted = [...chartDeals].sort((a, b) => b.size - a.size);
+
+  sorted.forEach(d => {
+    const j = jitterMap.get(d) || { dx: 0, dy: 0 };
+    const cx = xForYear(d.year) + j.dx;
+    const cy = yForDeal(d) + j.dy;
+    const r = rForSize(d.size);
+    const color = bubbleColor(d);
+    const isSpec = d.speculated;
+
+    let nodes = bubbleNodes.get(d.dealNo);
+    if (!nodes) {
+      // First render — create
+      const circle = el("circle", {
+        cx, cy, r,
+        fill: color,
+        "fill-opacity": isSpec ? 0.35 : 0.75,
+        stroke: color,
+        "stroke-width": 1.5,
+        "stroke-dasharray": isSpec ? "4 3" : null,
+        class: "bubble",
+      });
+      circle.addEventListener("mouseenter", () => showTooltip(d));
+      circle.addEventListener("mousemove", (e) => moveTooltip(e));
+      circle.addEventListener("mouseleave", hideTooltip);
+      bubblesGroup.appendChild(circle);
+
+      const numStr = String(d.dealNo);
+      const dia = r * 2;
+      let labelEl;
+      if (dia >= 22) {
+        let fontSize;
+        if (dia >= 50)      fontSize = 16;
+        else if (dia >= 36) fontSize = 13;
+        else                fontSize = 11;
+        labelEl = el("text", {
+          x: cx, y: cy + 1,
+          class: "bubble-label inside",
+          "font-size": fontSize,
+        }, numStr);
+      } else {
+        labelEl = el("text", {
+          x: cx, y: cy + r + 11,
+          class: "num-below",
+        }, numStr);
+      }
+      bubblesGroup.appendChild(labelEl);
+      nodes = { circle, label: labelEl, isLabelInside: dia >= 22, dia };
+      bubbleNodes.set(d.dealNo, nodes);
+    } else {
+      // Update existing — CSS transitions will animate
+      nodes.circle.setAttribute("cx", cx);
+      nodes.circle.setAttribute("cy", cy);
+      nodes.circle.setAttribute("fill", color);
+      nodes.circle.setAttribute("stroke", color);
+      // Move label too
+      nodes.label.setAttribute("x", cx);
+      if (nodes.isLabelInside) {
+        nodes.label.setAttribute("y", cy + 1);
+      } else {
+        nodes.label.setAttribute("y", cy + r + 11);
+      }
+    }
+  });
+}
+
+// =====================================================================
+// TOOLTIP
+// =====================================================================
+let lastTooltipDeal = null;
+
+function showTooltip(d) {
+  lastTooltipDeal = d;
+  const dealName = d.target ? `${d.acquirer} / ${d.target}` : d.acquirer;
+  const perfLabel = PERF_LABELS[d.perf] || "—";
+  const perfDesc = PERF_DESCRIPTIONS[d.perf] || "";
+  const perfColor = PERF_COLORS[d.perf] || "#999";
+
+  tooltip.innerHTML = `
+    <div class="tt-name">
+      <span class="tt-deal-no">#${d.dealNo}</span>${dealName}${d.speculated ? '<span class="tt-spec-tag">spec.</span>' : ''}
+    </div>
+    <div class="tt-row">
+      <span class="tt-key">Year</span><span class="tt-val">${d.year}</span>
+      <span class="tt-key">Size</span><span class="tt-val size">${fmtSize(d)}${d.speculated ? ' (announced/uncertain)' : ''}</span>
+      <span class="tt-key">Objective</span><span class="tt-val">${d.obj}</span>
+      <span class="tt-key">Sub-segment</span><span class="tt-val">${SUBSEG_DISPLAY[d.subseg] || d.subseg}</span>
+      <span class="tt-key">Outcome</span><span class="tt-val">
+        <span class="tt-perf" style="background:${perfColor}">${perfLabel}</span>
+      </span>
+    </div>
+    <div class="tt-perf-desc">${perfDesc}</div>
+  `;
+  tooltip.classList.add("visible");
+  tooltip.setAttribute("aria-hidden", "false");
+}
+
+function moveTooltip(e) {
+  const wrapper = svg.parentElement;
+  const wrapRect = wrapper.getBoundingClientRect();
+  const x = e.clientX - wrapRect.left;
+  const y = e.clientY - wrapRect.top;
+  const tw = tooltip.offsetWidth;
+  const th = tooltip.offsetHeight;
+  // Position tooltip with smart bounds
+  let tx = x + 14;
+  let ty = y + 14;
+  if (tx + tw > wrapRect.width)  tx = x - tw - 14;
+  if (ty + th > wrapRect.height) ty = y - th - 14;
+  if (tx < 0) tx = 4;
+  if (ty < 0) ty = 4;
+  tooltip.style.left = tx + "px";
+  tooltip.style.top  = ty + "px";
+}
+
+function hideTooltip() {
+  tooltip.classList.remove("visible");
+  tooltip.setAttribute("aria-hidden", "true");
+  lastTooltipDeal = null;
+}
+
+// =====================================================================
+// LEGEND
+// =====================================================================
+function renderLegend(view) {
+  const legend = document.getElementById("legend");
+  legend.innerHTML = "";
+
+  if (view === "archetype" || view === "subsegment") {
+    legend.innerHTML = `<span class="legend-title">${view === "archetype" ? "Strategic objective:" : "Strategic objective (color):"}</span>`;
+    OBJECTIVES.forEach(obj => {
+      const item = document.createElement("div");
+      item.className = "legend-item";
+      item.innerHTML = `
+        <div class="legend-swatch" style="background:${OBJ_COLORS[obj]};color:${OBJ_COLORS[obj]}"></div>
+        <div class="legend-text"><strong>${obj}</strong></div>
+      `;
+      legend.appendChild(item);
+    });
+  } else if (view === "performance") {
+    legend.innerHTML = '<span class="legend-title">Outcome:</span>';
+    ["green", "red", "amber", "pink"].forEach(p => {
+      const item = document.createElement("div");
+      item.className = "legend-item";
+      item.innerHTML = `
+        <div class="legend-swatch" style="background:${PERF_COLORS[p]};color:${PERF_COLORS[p]}"></div>
+        <div class="legend-text"><strong>${PERF_LABELS[p]}</strong><span class="desc">${PERF_DESCRIPTIONS[p]}</span></div>
+      `;
+      legend.appendChild(item);
+    });
+  }
+}
+
+// =====================================================================
+// STAT BAR — summary of the active view
+// =====================================================================
+function renderStatBar(view) {
+  const sb = document.getElementById("statBar");
+  const chartDeals = DEALS.filter(d => d.size >= 1.0);
+  let html = "";
+
+  const totalDollars = chartDeals.reduce((a, d) => a + d.size, 0);
+  html += `<div><strong>${chartDeals.length}</strong>deals on chart</div>`;
+  html += `<div><strong>$${Math.round(totalDollars)}bn</strong>total deployed (announcement value)</div>`;
+
+  if (view === "performance") {
+    const counts = { green: 0, red: 0, amber: 0, pink: 0 };
+    chartDeals.forEach(d => counts[d.perf]++);
+    html += `<div><strong>${counts.green}</strong>working · <strong>${counts.red}</strong>failed · <strong>${counts.amber}</strong>pivoted · <strong>${counts.pink}</strong>too early</div>`;
+  } else if (view === "subsegment") {
+    const totals = {};
+    SUBSEGMENTS.forEach(s => totals[s] = 0);
+    chartDeals.forEach(d => totals[d.subseg] += d.size);
+    const top = Object.entries(totals).sort((a,b) => b[1] - a[1])[0];
+    html += `<div><strong>${top[0]}</strong>biggest lane · <strong>$${Math.round(top[1])}bn</strong></div>`;
+  }
+
+  sb.innerHTML = html;
+}
+
+// =====================================================================
+// FOOTER NOTE — view-specific
+// =====================================================================
+function renderFooter(view) {
+  const fn = document.getElementById("footerNote");
+  let extra = "";
+  if (view === "performance") {
+    extra = " Outcome calls based on PDF disclosed-deal register + public impairment data + strategic-review status.";
+  } else if (view === "subsegment") {
+    extra = " Sub-segment definitions: Food incl. snacks/frozen/condiments/dairy; Beverages incl. alcohol/coffee/soft drinks/energy; BPC = beauty + personal care; Consumer Health incl. OTC/VMS/infant nutrition; Pet & Household incl. pet food + services + cleaning.";
+  }
+  fn.textContent = "56 confirmed + 8 announced/speculated deals 2015–2026 (sized at announcement). Chart shows ≥$1bn only; smaller deals retained in source data." + extra;
+}
+
+// =====================================================================
+// INIT + TAB SWITCHING
+// =====================================================================
+function setView(view) {
+  document.querySelectorAll(".tab").forEach(t => {
+    t.classList.toggle("active", t.dataset.view === view);
+  });
+  hideTooltip();
+  render(view);
+  renderLegend(view);
+  renderStatBar(view);
+  renderFooter(view);
+}
+
+document.querySelectorAll(".tab").forEach(t => {
+  t.addEventListener("click", () => setView(t.dataset.view));
+});
+
+// Initial render
+setView("archetype");
+</script>
+</body>
+</html>
