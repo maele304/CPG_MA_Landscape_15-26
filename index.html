@@ -429,9 +429,25 @@
     margin-top: 1px;
   }
 
-  /* ---- FOOTER NOTE ---- */
+  /* ---- HEADER NOTES (above chart) ---- */
+  .header-notes {
+    margin-top: 16px;
+    margin-bottom: 18px;
+    padding: 0;
+  }
+  .header-note {
+    color: var(--text-muted);
+    font-size: 11px;
+    font-style: italic;
+    line-height: 1.5;
+    text-align: left;
+  }
+  .header-note + .header-note {
+    margin-top: 4px;
+  }
+
+  /* ---- FOOTER NOTE (legacy, retained for safety) ---- */
   .footer-note {
-    margin-top: 28px;
     color: var(--text-muted);
     font-size: 10.5px;
     font-style: italic;
@@ -501,7 +517,7 @@
     <div class="badge">Interactive</div>
   </div>
   <h1>CPG M&amp;A Landscape, 2015–2026 YTD.</h1>
-  <p class="subtitle">56 confirmed deals + 8 announced/speculated. Hover any bubble for deal details; switch the view-toggle below to recolor and re-bin the same set of deals.</p>
+  <p class="subtitle">58 confirmed deals + 7 announced/speculated. Hover any bubble for deal details.</p>
 
   <div class="stat-bar" id="statBar"></div>
 
@@ -532,16 +548,21 @@
     </nav>
   </div>
 
+  <div class="header-notes">
+    <div class="header-note" id="footerNote">
+      58 confirmed + 7 announced/speculated deals 2015–2026 (sized at announcement). Chart shows ≥$1bn only; smaller deals retained in source data.
+    </div>
+    <div class="header-note">
+      Each deal classified by acquirer's strategic intent. Reverse Morris Trusts and demergers (e.g. McCormick/Unilever Foods, J&amp;J/Kenvue) may also represent a Reshape story from the seller's side.
+    </div>
+  </div>
+
   <div class="chart-wrapper">
     <svg id="chart" class="chart" viewBox="0 0 1400 620" preserveAspectRatio="xMidYMid meet"></svg>
     <div id="tooltip" role="tooltip" aria-hidden="true"></div>
   </div>
 
   <div class="legend" id="legend"></div>
-
-  <div class="footer-note" id="footerNote">
-    56 confirmed + 8 announced/speculated deals 2015–2026 (sized at announcement). Chart shows ≥$1bn only; smaller deals retained in source data.
-  </div>
 
   <div class="signature">
     <div class="signature-mark">Mae Le</div>
@@ -991,7 +1012,7 @@ const DEALS = [
     "acquirer": "KDP",
     "target": "JDE Peet's",
     "year": 2025,
-    "size": 24,
+    "size": 18,
     "obj": "Scale Up",
     "label": "KDP/JDE",
     "speculated": false,
@@ -1015,7 +1036,7 @@ const DEALS = [
     "acquirer": "Coca-Cola HBC",
     "target": "CCBA",
     "year": 2025,
-    "size": 3.8,
+    "size": 3.4,
     "obj": "Scale Up",
     "label": "",
     "speculated": false,
@@ -1037,7 +1058,7 @@ const DEALS = [
   },
   {
     "acquirer": "Lactalis",
-    "target": "Fonterra Ingredients",
+    "target": "Mainland Group (Fonterra Consumer)",
     "year": 2025,
     "size": 2.5,
     "obj": "Scale Up",
@@ -1075,13 +1096,13 @@ const DEALS = [
     "acquirer": "KMB",
     "target": "Kenvue",
     "year": 2025,
-    "size": 49.7,
+    "size": 48.7,
     "obj": "Enter Adjacency",
     "label": "KMB/Kenvue",
     "speculated": false,
     "perf": "pink",
     "subseg": "Consumer Health",
-    "dealNo": 44
+    "dealNo": 45
   },
   {
     "acquirer": "Reckitt→Advent",
@@ -1093,31 +1114,31 @@ const DEALS = [
     "speculated": false,
     "perf": "pink",
     "subseg": "Pet & Household",
-    "dealNo": 45
+    "dealNo": 46
   },
   {
     "acquirer": "Unilever→Magnum",
-    "target": "(demerger)",
+    "target": "(listing market cap)",
     "year": 2025,
-    "size": 15,
+    "size": 9,
     "obj": "Reshape Portfolio",
     "label": "Unilever→Magnum",
     "speculated": false,
     "perf": "pink",
     "subseg": "Food",
-    "dealNo": 46
+    "dealNo": 47
   },
   {
-    "acquirer": "Nestlé→PAI/ADIA",
-    "target": "(Froneri restructure)",
+    "acquirer": "PAI/ADIA/GS",
+    "target": "Froneri continuation",
     "year": 2025,
-    "size": 4.2,
+    "size": 3.9,
     "obj": "Reshape Portfolio",
     "label": "",
     "speculated": false,
     "perf": "pink",
     "subseg": "Food",
-    "dealNo": 47
+    "dealNo": 48
   },
   {
     "acquirer": "TreeHouse",
@@ -1129,7 +1150,7 @@ const DEALS = [
     "speculated": false,
     "perf": "pink",
     "subseg": "Food",
-    "dealNo": 48
+    "dealNo": 49
   },
   {
     "acquirer": "Estée Lauder",
@@ -1141,7 +1162,7 @@ const DEALS = [
     "speculated": true,
     "perf": "pink",
     "subseg": "Beauty & Personal Care",
-    "dealNo": 49
+    "dealNo": 50
   },
   {
     "acquirer": "Kraft Heinz split",
@@ -1153,19 +1174,19 @@ const DEALS = [
     "speculated": true,
     "perf": "amber",
     "subseg": "Food",
-    "dealNo": 50
+    "dealNo": 51
   },
   {
     "acquirer": "L'Oréal",
-    "target": "Kering Beauté",
+    "target": "Kering Beauté (Creed)",
     "year": 2026,
-    "size": 4.7,
+    "size": 4.6,
     "obj": "Acquire Capability",
     "label": "",
     "speculated": false,
     "perf": "pink",
     "subseg": "Beauty & Personal Care",
-    "dealNo": 51
+    "dealNo": 53
   },
   {
     "acquirer": "Clorox",
@@ -1177,19 +1198,19 @@ const DEALS = [
     "speculated": false,
     "perf": "pink",
     "subseg": "Pet & Household",
-    "dealNo": 52
+    "dealNo": 55
   },
   {
     "acquirer": "McCormick",
     "target": "Unilever Foods (RMT)",
     "year": 2026,
-    "size": 45,
-    "obj": "Enter Adjacency",
+    "size": 44.8,
+    "obj": "Scale Up",
     "label": "McCormick/UF",
     "speculated": false,
     "perf": "pink",
     "subseg": "Food",
-    "dealNo": 53
+    "dealNo": 52
   },
   {
     "acquirer": "Bayer CH spin",
@@ -1201,19 +1222,19 @@ const DEALS = [
     "speculated": true,
     "perf": "pink",
     "subseg": "Consumer Health",
-    "dealNo": 54
+    "dealNo": 56
   },
   {
-    "acquirer": "Henkel Beauty",
-    "target": "(strategic review)",
+    "acquirer": "Henkel",
+    "target": "Olaplex",
     "year": 2026,
-    "size": 5,
-    "obj": "Reshape Portfolio",
-    "label": "",
-    "speculated": true,
+    "size": 1.4,
+    "obj": "Acquire Capability",
+    "label": "Henkel/Olaplex",
+    "speculated": false,
     "perf": "pink",
     "subseg": "Beauty & Personal Care",
-    "dealNo": 55
+    "dealNo": 54
   },
   {
     "acquirer": "Nestlé",
@@ -1225,7 +1246,7 @@ const DEALS = [
     "speculated": true,
     "perf": "pink",
     "subseg": "Food",
-    "dealNo": 56
+    "dealNo": 57
   },
   {
     "acquirer": "McCormick",
@@ -1237,7 +1258,7 @@ const DEALS = [
     "speculated": false,
     "perf": "green",
     "subseg": "Food",
-    "dealNo": 57
+    "dealNo": 58
   },
   {
     "acquirer": "Mondelez",
@@ -1249,7 +1270,7 @@ const DEALS = [
     "speculated": true,
     "perf": "pink",
     "subseg": "Food",
-    "dealNo": 58
+    "dealNo": 59
   },
   {
     "acquirer": "Hero/Mighty Patch",
@@ -1261,7 +1282,7 @@ const DEALS = [
     "speculated": false,
     "perf": "green",
     "subseg": "Beauty & Personal Care",
-    "dealNo": 59
+    "dealNo": 60
   },
   {
     "acquirer": "GenMills sale",
@@ -1273,7 +1294,7 @@ const DEALS = [
     "speculated": false,
     "perf": "green",
     "subseg": "Food",
-    "dealNo": 60
+    "dealNo": 61
   },
   {
     "acquirer": "L'Oréal",
@@ -1285,7 +1306,7 @@ const DEALS = [
     "speculated": true,
     "perf": "pink",
     "subseg": "Beauty & Personal Care",
-    "dealNo": 61
+    "dealNo": 62
   },
   {
     "acquirer": "Unilever",
@@ -1297,7 +1318,7 @@ const DEALS = [
     "speculated": true,
     "perf": "pink",
     "subseg": "Beauty & Personal Care",
-    "dealNo": 62
+    "dealNo": 63
   },
   {
     "acquirer": "KDP",
@@ -1309,7 +1330,7 @@ const DEALS = [
     "speculated": false,
     "perf": "pink",
     "subseg": "Beverages — non-alcoholic",
-    "dealNo": 63
+    "dealNo": 64
   },
   {
     "acquirer": "Flowers",
@@ -1321,7 +1342,19 @@ const DEALS = [
     "speculated": false,
     "perf": "pink",
     "subseg": "Food",
-    "dealNo": 64
+    "dealNo": 65
+  },
+  {
+    "acquirer": "Celsius Holdings",
+    "target": "Alani Nu",
+    "year": 2025,
+    "size": 1.8,
+    "obj": "Bet on a Trend",
+    "label": "Celsius/Alani Nu",
+    "speculated": false,
+    "perf": "pink",
+    "subseg": "Beverages — non-alcoholic",
+    "dealNo": 44
   }
 ];
 
@@ -1364,8 +1397,8 @@ const PERF_COLORS = {
 };
 
 const PERF_LABELS = {
-  "green": "Working",
-  "red":   "Failed / impaired",
+  "green": "No visible negative signal",
+  "red":   "Impaired / publicly underperformed",
   "amber": "Pivoted",
   "pink":  "Too early to tell",
 };
@@ -1374,7 +1407,7 @@ const PERF_DESCRIPTIONS = {
   "green": "No public impairment; thesis paying off; value created",
   "red":   "Fact-based: write-downs, divested at loss, abandoned thesis",
   "amber": "Deal happened, then strategy changed (de-merger, absorption, split)",
-  "pink":  "Typically 2023+ deals; outcome not yet observable",
+  "pink":  "2023 onward deals; outcome not yet observable",
 };
 
 const ERAS = [
@@ -1385,7 +1418,7 @@ const ERAS = [
     caption: "COVID-era reset",
     note: "Continued bolt-ons + first divestiture wave; supply-chain disruption + valuation reset" },
   { startYear: 2022, endYear: 2026, tint: "#F4F8F2",
-    caption: "Selective return",
+    caption: "Reshape & rebound",
     note: "Renewed mega-deal volume + structural reshape (demergers, PE carve-outs)" },
 ];
 
@@ -1686,10 +1719,13 @@ function render(view) {
       circle.addEventListener("mouseleave", hideTooltip);
       bubblesGroup.appendChild(circle);
 
+      // Note: We deliberately render only the deal NUMBER, not the deal name.
+      // Names are revealed on hover via the tooltip — this keeps the chart clean.
       const numStr = String(d.dealNo);
       const dia = r * 2;
       let labelEl;
       if (dia >= 22) {
+        // Number inside bubble — sized to bubble
         let fontSize;
         if (dia >= 50)      fontSize = 16;
         else if (dia >= 36) fontSize = 13;
@@ -1700,6 +1736,7 @@ function render(view) {
           "font-size": fontSize,
         }, numStr);
       } else {
+        // Number below tiny bubble
         labelEl = el("text", {
           x: cx, y: cy + r + 11,
           class: "num-below",
@@ -1733,9 +1770,6 @@ let lastTooltipDeal = null;
 function showTooltip(d) {
   lastTooltipDeal = d;
   const dealName = d.target ? `${d.acquirer} / ${d.target}` : d.acquirer;
-  const perfLabel = PERF_LABELS[d.perf] || "—";
-  const perfDesc = PERF_DESCRIPTIONS[d.perf] || "";
-  const perfColor = PERF_COLORS[d.perf] || "#999";
 
   tooltip.innerHTML = `
     <div class="tt-name">
@@ -1746,11 +1780,7 @@ function showTooltip(d) {
       <span class="tt-key">Size</span><span class="tt-val size">${fmtSize(d)}${d.speculated ? ' (announced/uncertain)' : ''}</span>
       <span class="tt-key">Objective</span><span class="tt-val">${d.obj}</span>
       <span class="tt-key">Sub-segment</span><span class="tt-val">${SUBSEG_DISPLAY[d.subseg] || d.subseg}</span>
-      <span class="tt-key">Outcome</span><span class="tt-val">
-        <span class="tt-perf" style="background:${perfColor}">${perfLabel}</span>
-      </span>
     </div>
-    <div class="tt-perf-desc">${perfDesc}</div>
   `;
   tooltip.classList.add("visible");
   tooltip.setAttribute("aria-hidden", "false");
@@ -1827,7 +1857,7 @@ function renderStatBar(view) {
   if (view === "performance") {
     const counts = { green: 0, red: 0, amber: 0, pink: 0 };
     chartDeals.forEach(d => counts[d.perf]++);
-    html += `<div><strong>${counts.green}</strong>working · <strong>${counts.red}</strong>failed · <strong>${counts.amber}</strong>pivoted · <strong>${counts.pink}</strong>too early</div>`;
+    html += `<div><strong>${counts.green}</strong>clean · <strong>${counts.red}</strong>impaired · <strong>${counts.amber}</strong>pivoted · <strong>${counts.pink}</strong>too early</div>`;
   } else if (view === "subsegment") {
     const totals = {};
     SUBSEGMENTS.forEach(s => totals[s] = 0);
@@ -1850,7 +1880,7 @@ function renderFooter(view) {
   } else if (view === "subsegment") {
     extra = " Sub-segment definitions: Food incl. snacks/frozen/condiments/dairy; Beverages incl. alcohol/coffee/soft drinks/energy; BPC = beauty + personal care; Consumer Health incl. OTC/VMS/infant nutrition; Pet & Household incl. pet food + services + cleaning.";
   }
-  fn.textContent = "56 confirmed + 8 announced/speculated deals 2015–2026 (sized at announcement). Chart shows ≥$1bn only; smaller deals retained in source data." + extra;
+  fn.textContent = "58 confirmed + 7 announced/speculated deals 2015–2026 (sized at announcement). Chart shows ≥$1bn only; smaller deals retained in source data." + extra;
 }
 
 // =====================================================================
